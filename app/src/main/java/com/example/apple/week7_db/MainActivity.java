@@ -1,6 +1,7 @@
 package com.example.apple.week7_db;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.PhoneNumberUtils;
@@ -11,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -21,11 +22,12 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     EditText etName, etPhone, etSalary;
-    Button butAdd;
+    Button butAdd,butEdit,butDel;
     private Context context;
     private boolean Formatting;
     private int After;
     private DatabaseHandler db;
+    private List<Contact> contacts = new ArrayList<Contact>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,20 @@ public class MainActivity extends AppCompatActivity {
         etPhone = (EditText) findViewById(R.id.editTextAddPhone);
         etSalary = (EditText) findViewById(R.id.editTextAddSarary);
         butAdd = (Button) findViewById(R.id.butAdd);
+        butEdit = (Button)findViewById(R.id.butEdit);
+        butDel = (Button)findViewById(R.id.butDel);
+        butEdit.setEnabled(false);
+        butDel.setEnabled(false);
+
         context = this;
         db = new DatabaseHandler(this);
+
+        contacts = db.getAllContacts();
+        if(contacts.size() > 0){
+            listView();
+            butEdit.setEnabled(true);
+            butDel.setEnabled(true);
+        }
 
         etPhone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -83,32 +97,28 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
                     db.addContact(new Contact(etName.getText().toString(), etPhone.getText().toString(), etSalary.getText().toString()));
-                    List<Contact> contacts = db.getAllContacts();
-
+                    contacts = db.getAllContacts();
                     if (contacts.size() > 0) {
                         editTextClear();
                     }
-
-                    String[] datas = new String[contacts.size()];
-
-                    String[] datas1 = new String[contacts.size()];
-
-                    String[] datas2 = new String[contacts.size()];
-
-                    for (int i = 0; i < datas.length; i++) {
-                        datas[i] = contacts.get(i)._name;
-                    }
-                    for (int i = 0; i < datas1.length; i++) {
-                        datas1[i] = contacts.get(i)._phone_number;
-                    }
-                    for (int i = 0; i < datas2.length; i++) {
-                        datas2[i] = contacts.get(i)._salary;
-                    }
-
-                    CustomAdapter adapter = new CustomAdapter(getApplicationContext(), datas, datas1, datas2);
-                    ListView listView = (ListView) findViewById(R.id.ListView1);
-                    listView.setAdapter(adapter);
+                    listView();
+                    butEdit.setEnabled(true);
+                    butDel.setEnabled(true);
                 }
+            }
+        });
+        butEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,Activity2Edit.class);
+                startActivity(intent);
+            }
+        });
+        butDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,Activity3Del.class);
+                startActivity(intent);
             }
         });
     }
@@ -118,5 +128,26 @@ public class MainActivity extends AppCompatActivity {
         etPhone.setText("");
         etSalary.setText("");
         etName.requestFocus();
+    }
+    public void listView(){
+        String[] datas = new String[contacts.size()];
+
+        String[] datas1 = new String[contacts.size()];
+
+        String[] datas2 = new String[contacts.size()];
+
+        for (int i = 0; i < datas.length; i++) {
+            datas[i] = contacts.get(i)._name;
+        }
+        for (int i = 0; i < datas1.length; i++) {
+            datas1[i] = contacts.get(i)._phone_number;
+        }
+        for (int i = 0; i < datas2.length; i++) {
+            datas2[i] = contacts.get(i)._salary;
+        }
+
+        CustomAdapter adapter = new CustomAdapter(getApplicationContext(), datas, datas1, datas2);
+        ListView listView = (ListView) findViewById(R.id.ListView1);
+        listView.setAdapter(adapter);
     }
 }

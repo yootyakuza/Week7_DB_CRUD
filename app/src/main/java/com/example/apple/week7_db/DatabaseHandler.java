@@ -105,5 +105,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 KEY_ID + " = ?",
                 new String[] {String.valueOf(contact._id)}
         );
+        db.close();
     }
 }

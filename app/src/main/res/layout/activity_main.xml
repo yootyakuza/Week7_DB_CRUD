@@ -8,7 +8,7 @@
 
     <EditText
         android:id="@+id/editTextAddPhone"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -25,14 +25,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        app:srcCompat="@drawable/ic_person" />
+        app:srcCompat="@drawable/ic_person"
+        android:id="@+id/imageView2" />
 
     <EditText
         android:id="@+id/editTextAddName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:ems="10"
         android:hint="Name"
@@ -49,7 +50,7 @@
 
     <EditText
         android:id="@+id/editTextAddSarary"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -68,12 +69,32 @@
         app:srcCompat="@drawable/ic_phone" />
 
     <Button
+        android:id="@+id/butDel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextAddPhone"
+        android:layout_toEndOf="@+id/editTextAddSarary"
+        android:layout_toRightOf="@+id/editTextAddSarary"
+        android:text="Delete" />
+
+    <Button
+        android:id="@+id/butEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editTextAddPhone"
+        android:layout_alignBottom="@+id/editTextAddPhone"
+        android:layout_toEndOf="@+id/editTextAddPhone"
+        android:layout_toRightOf="@+id/editTextAddPhone"
+        android:text="Edit" />
+
+    <Button
         android:id="@+id/butAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/editTextAddSarary"
+        android:layout_alignBaseline="@+id/editTextAddName"
+        android:layout_alignBottom="@+id/editTextAddName"
+        android:layout_toEndOf="@+id/editTextAddPhone"
+        android:layout_toRightOf="@+id/editTextAddPhone"
         android:text="Add a new row" />
 
     <ListView
@@ -82,7 +103,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/butAdd"
+        android:layout_below="@+id/editTextAddSarary"
         android:paddingBottom="50dp"
         android:paddingLeft="30px" />
 
