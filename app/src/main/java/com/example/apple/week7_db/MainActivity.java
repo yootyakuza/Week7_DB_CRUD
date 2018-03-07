@@ -138,11 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < datas.length; i++) {
             datas[i] = contacts.get(i)._name;
-        }
-        for (int i = 0; i < datas1.length; i++) {
             datas1[i] = contacts.get(i)._phone_number;
-        }
-        for (int i = 0; i < datas2.length; i++) {
             datas2[i] = contacts.get(i)._salary;
         }
 
