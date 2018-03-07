@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -22,7 +23,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     EditText etName, etPhone, etSalary;
-    Button butAdd,butEdit,butDel;
+    Button butAdd, butEdit, butDel;
     private Context context;
     private boolean Formatting;
     private int After;
@@ -39,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         etPhone = (EditText) findViewById(R.id.editTextAddPhone);
         etSalary = (EditText) findViewById(R.id.editTextAddSarary);
         butAdd = (Button) findViewById(R.id.butAdd);
-        butEdit = (Button)findViewById(R.id.butEdit);
-        butDel = (Button)findViewById(R.id.butDel);
+        butEdit = (Button) findViewById(R.id.butEdit);
+        butDel = (Button) findViewById(R.id.butDel);
         butEdit.setEnabled(false);
         butDel.setEnabled(false);
 
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         db = new DatabaseHandler(this);
 
         contacts = db.getAllContacts();
-        if(contacts.size() > 0){
+        if (contacts.size() > 0) {
             listView();
             butEdit.setEnabled(true);
             butDel.setEnabled(true);
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 if (!Formatting) {
                     Formatting = true;
-                    if(After != 0) //กรณีที่ไม่ได้กด backspace ใช้ format US และกำหนด length ถ้าไทยจะเป็น getDefault() แต่จะไม่ได้ผลลัพธ์ที่ต้องการคือ xxx-xxx-xxxx
+                    if (After != 0) //กรณีที่ไม่ได้กด backspace ใช้ format US และกำหนด length ถ้าไทยจะเป็น getDefault() แต่จะไม่ได้ผลลัพธ์ที่ต้องการคือ xxx-xxx-xxxx
                         PhoneNumberUtils.formatNumber(editable, PhoneNumberUtils.getFormatTypeForLocale(Locale.US));
                     Formatting = false;
                 }
@@ -110,14 +111,14 @@ public class MainActivity extends AppCompatActivity {
         butEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,Activity2Edit.class);
+                Intent intent = new Intent(context, Activity2Edit.class);
                 startActivity(intent);
             }
         });
         butDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,Activity3Del.class);
+                Intent intent = new Intent(context, Activity3Del.class);
                 startActivity(intent);
             }
         });
@@ -129,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
         etSalary.setText("");
         etName.requestFocus();
     }
-    public void listView(){
+
+    public void listView() {
         String[] datas = new String[contacts.size()];
 
         String[] datas1 = new String[contacts.size()];
