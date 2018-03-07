@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
 public class Activity3Del extends AppCompatActivity {
     Button butDelete;
     EditText editDel;
+    RelativeLayout relativeLayout;
     private DatabaseHandler db;
     private List<Contact> contacts = new ArrayList<Contact>();
     private int result = 0;
@@ -25,6 +27,7 @@ public class Activity3Del extends AppCompatActivity {
 
         butDelete = (Button)findViewById(R.id.buttonDelete);
         editDel = (EditText)findViewById(R.id.editID);
+        relativeLayout = (RelativeLayout)findViewById(R.id.LayoutID);
         db = new DatabaseHandler(this);
         contacts = db.getAllContacts();
 
@@ -35,8 +38,8 @@ public class Activity3Del extends AppCompatActivity {
                 if(contacts.size() > 0){
                     result = Integer.parseInt(editDel.getText().toString());
                     db.deleteContact(new Contact(result));
-//                    Snackbar snackbar = Snackbar.make(getApplicationContext(),"Delete successfully",Snackbar.LENGTH_SHORT);
-//                    snackbar.show();
+                    Snackbar snackbar = Snackbar.make(relativeLayout,"Delete successfully",Snackbar.LENGTH_LONG);
+                    snackbar.show();
                     finish();
                 }
                 else {
