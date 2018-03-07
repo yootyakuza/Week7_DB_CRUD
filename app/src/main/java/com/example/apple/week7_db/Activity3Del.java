@@ -1,5 +1,6 @@
 package com.example.apple.week7_db;
 
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,7 +41,14 @@ public class Activity3Del extends AppCompatActivity {
                     db.deleteContact(new Contact(result));
                     Snackbar snackbar = Snackbar.make(relativeLayout,"Delete successfully",Snackbar.LENGTH_LONG);
                     snackbar.show();
-                    finish();
+                    //set Delay
+                    Handler handler = new Handler();
+
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            finish();
+                        }
+                    }, 2000);
                 }
                 else {
                     Toast t = Toast.makeText(getApplicationContext(),contacts.size() + ":Rows",Toast.LENGTH_SHORT);
